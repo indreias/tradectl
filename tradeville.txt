@@ -1,0 +1,48 @@
+addSharesOrder.sh <orderType> <shareSymbol> <price> <quantity>
+	Add new order for the mentioned share.
+	Available orderType are:
+	    * buy 
+	    * sell
+	
+	Note: currently only OPEN orders are supported
+	-------------------------------------------------------------------------------------------------------
+
+cancelAllOrders.sh [<shareSymbol>]
+	Cancel all orders (if no share symbol is supplied)
+	-------------------------------------------------------------------------------------------------------
+
+cancelOrder.sh <orderID>
+	Cancel the specified order
+	Note: password will be read from terminal if not present into the .conf file
+	-------------------------------------------------------------------------------------------------------
+
+getAccountID.sh
+
+getActiveOrders.sh
+
+getAvailableCash.sh [<currency>]
+	Get available cash (in all currencies) or only for a selected one, like USD
+	-------------------------------------------------------------------------------------------------------
+
+getMarketDepth.sh <shareSymbol>
+	Get current market depth for the specified share.
+	-------------------------------------------------------------------------------------------------------
+
+getPortfolio.sh [details]
+	Get portfolio total vallue or get its details
+	-------------------------------------------------------------------------------------------------------
+
+getQuotes.sh [<shareSymbol>] [<dataType>]
+	Get quotes for the mentioned share (or for all if not mentioned).
+	Available datatypes are:
+	    * AVG  - daily averages (default type)
+	    * TRAN - daily tranzactions
+	-------------------------------------------------------------------------------------------------------
+
+isLoggedIn.sh
+
+login.sh [<user>]
+	Login with the user from command line (if provided), from .conf file (if present) or read from terminal
+	Note: password will be read from terminal if not present into the .conf file
+	-------------------------------------------------------------------------------------------------------
+
