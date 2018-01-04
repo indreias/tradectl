@@ -30,11 +30,20 @@ s|Pret|Ordin|;s|Price|Order|' | sed 's|[[:space:]]*$||g;/^$/d'
 
 if [ -n "$info" ]
 then
+  # Active orders found
   msg="$info"
   ret_code=0
 else
-  msg="FAILURE\tcode:99"
-  ret_code=99
+  # Check for message about no active orders
+  info=$(htmlExtract "$OUT_HOME" "ucActiveOrders" "<span" "</span" 1 | sed 's|<span[^>]*>||;s|</span>||;s|<br[^>]*>||')
+  if [ -n "$info" ]
+  then
+    msg=("$info")
+    ret_code=0
+  else
+    msg="FAILURE\tcode:99"
+    ret_code=99
+  fi
 fi
 
 echo -e "$msg"

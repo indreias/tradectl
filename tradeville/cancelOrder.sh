@@ -42,7 +42,8 @@ ret_code=$?
 exitOnError $ret_code "$info"
 
 
-if [ $(grep -c 'ultima comanda</td><td>confirmare anulare' $OUT_TMP) -eq 1 ]
+if [ $(grep -c 'ultima comanda</td><td>confirmare anulare' $OUT_TMP) -eq 1    -o \
+     $(grep -c 'ultima comanda</td><td>DA anulare'         $OUT_TMP) -eq 1       ]
 then
   msg="SUCCESS"
 else

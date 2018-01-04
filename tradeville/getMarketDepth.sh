@@ -14,16 +14,10 @@ info=$(my_curl "$MY_URL/UpdateAjax/Utils.ashx?method=MarketDepth&symbol=$1&level
 ret_code=$?
 exitOnError $ret_code "$info"
 
-info=$(cat "$OUT_TMP" | sed "s/<table.*<\/th><\/tr><tr align=\"right\">//;
-     s/<\/td><tr class=\"total.*table>//;
-     s/<td class=\"md_bid_cell_[lightdark]*\">/b /g;
-     s/<\/td><td class='md_bid_cell_[lightdark]*'>/ /g;
-     s/<\/td><td class='md_bid_cell_[lightdark]*' style=\"cursor:url('\.\.\/\.\.\/img\/hand2x\.cur'),pointer\">/ /g;
-     s/<\/td><td class='md_ask_cell_[lightdark]*' style=\"cursor:url('\.\.\/\.\.\/img\/hand2x\.cur'),pointer\">/CRLFa /g;
-     s/<\/td><td class='md_ask_cell_[lightdark]*'>/ /g;
-     s/<\/td><tr align=\"right\">/CRLF/g;
-     s/,//g;
-     s/CRLF/\n/g" | grep -v '^a *$\|^b *$' | awk '{if ($1 == "b") print $1" "$4" "$3" "$2; else print $0}' | sort --key=2,2
+info=$(cat "$OUT_TMP" | sed '
+s|<table.*</th></tr>||g;s|<tr class="total".*$||;
+s|<tr[^>]*>|\n|g;
+s|<td[^>]*>||g;s|</td>|:|g;s|,||g' | awk 'BEGIN{FS=":"}{if ($1 != "") {print "b "$3" "$2" "$1}}{if ($4 != "") {print "a "$4" "$5" "$6}}' | sort --key=2,2
 )
 
 if [ -n "$info" ]
