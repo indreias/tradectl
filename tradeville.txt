@@ -1,10 +1,6 @@
-addSharesOrder.sh <orderType> <shareSymbol> <price> <quantity>
+addSharesOrder.sh buy|sell <shareSymbol> <price> <quantity> [open|day|<mm/dd/yyyy>|<minutes>]
 	Add new order for the mentioned share.
-	Available orderType are:
-	    * buy 
-	    * sell
-	
-	Note: currently only OPEN orders are supported
+	Note: The default value for valability is open.
 	-------------------------------------------------------------------------------------------------------
 
 cancelAllOrders.sh [<shareSymbol>]
