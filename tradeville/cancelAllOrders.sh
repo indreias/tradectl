@@ -10,10 +10,13 @@ helpMe $@
 if isLoggedIn
 then
 
-info=$(my_curl "$MY_URL/ashx/ordine.ashx?hdlr=da" --data "somefakename=&anotherfakename=&hdlr=da&meniu=&anulare=da&comanda=DA&einpagregare=&simbao=$1&bdaa=DA&bnua=NU&timeStamp=$(date '+%s')" -o $OUT_TMP)
+info=$(my_curl "$MY_URL/ashx/ordine.ashx?hdlr=da" --data "somefakename=&anotherfakename=&hdlr=da&meniu=&anulare=da&comanda=DA&einpagregare=&simbao=$1&bdaa=DA&bnua=NU&timeStamp=$(date '+%s%N' | cut -c -13)" -o $OUT_TMP)
 ret_code=$?
 exitOnError $ret_code "$info"
 
+info=$(my_curl "$MY_URL/ashx/ordine.ashx?hdlr=da" --data "somefakename=&anotherfakename=&hdlr=da&meniu=&anulare=da&comanda=&einpagregare=&simbao=$1&banuleaza=anuleaza&timeStamp=$(date '+%s%N' | cut -c -13)" -o $OUT_TMP)
+ret_code=$?
+exitOnError $ret_code "$info"
 
 if [ $(grep -c 'class="nusuntdate"' $OUT_TMP) -eq 1 ]
 then

@@ -36,7 +36,7 @@ then
   fi
 fi
 
-echo -n "pw=$PASS_ORDER&banul=anulare&idord=A$1&timeStamp=$(date '+%s')" > "$FILE_MYDATA"
+echo -n "pw=$PASS_ORDER&banul=anulare&idord=A$1&timeStamp=$(date '+%s%N' | cut -c -13)" > "$FILE_MYDATA"
 info=$(my_curl "$MY_URL/ashx/ordurm.ashx?hdlr=da" --data @"$FILE_MYDATA" -o $OUT_TMP)
 ret_code=$?
 exitOnError $ret_code "$info"
