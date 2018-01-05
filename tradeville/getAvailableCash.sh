@@ -22,6 +22,7 @@ s|.*<tr[^>]*><td[^>]*>||g;s|</tr>||g;
 s|<script[^<]*</script>||g;
 s|<span[^>]*>||g;s|</span>||g;
 s|<img[^>]*/>||g;
+s|</div>||g;
 s|<td[^>]*>||g;
 s|>-</td||g;s|\(</td>\)*|\1|g;s|</td>|\t|g;
 s|,||g;s/[lL][eE][iI]/RON/g' |  awk '{print $1"\t"$(NF-1)}')
