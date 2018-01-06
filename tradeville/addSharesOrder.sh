@@ -5,7 +5,6 @@
 HELPME_VAR=4
 HELPME_TXT="buy|sell <shareSymbol> <price> <quantity> [open|day|<mm/dd/yyyy>|<minutes>]
 Add new order for the mentioned share.
-
 Note: The default value for valability is open."
 helpMe $@
 
@@ -22,7 +21,7 @@ quantity=$4
 valabValue=$(date '+%m/%d/%Y')
 shopt -s extglob
 case "$5" in
-  open)		valabType=open;; 
+  open|"")	valabType=open;; 
   day)		valabType=day;;
   0[1-9]/[0-3][0-9]/2[0-9][0-9][0-9])	valabType=date;valabValue=$5;;
   1[0-2]/[0-3][0-9]/2[0-9][0-9][0-9])	valabType=date;valabValue=$5;;
